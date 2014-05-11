@@ -7,7 +7,7 @@
       selItemList: '.menu-item-children',
       claExpanding: '-expanding',
       claExpanded: '-expanded',
-      msAimDuration: 800,
+      msAimDuration: 600,
       pxBreakpoint: parseInt(window.breakpoint, 10)
     },
     _create: function() {
@@ -20,9 +20,8 @@
             return;
           }
           $currentItem = $(event.target).closest(_this.options.selItem_withChildren).addClass(_this.options.claExpanding);
-          console.log(jQuery._data($currentItem.get(0), "events"));
           $currentItem.get(0).preventClick = true;
-          $list = $currentItem.children(_this.options.selItemList).finish().slideDown(_this.options.msAimDuration, function() {
+          $list = $currentItem.children(_this.options.selItemList).stop().fadeIn(_this.options.msAimDuration, function() {
             $currentItem.removeClass(_this.options.claExpanding).addClass(_this.options.claExpanded);
             return $currentItem.get(0).preventClick = false;
           });
@@ -38,8 +37,9 @@
             if (!($window.width() > _this.options.pxBreakpoint)) {
               return;
             }
-            $currentItem.removeClass(_this.options.claExpanded);
-            return $list.slideUp(_this.options.msAimDuration, function() {
+            return $list.stop().fadeOut(_this.options.msAimDuration, function() {
+              $currentItem.removeClass(_this.options.claExpanding);
+              $currentItem.removeClass(_this.options.claExpanded);
               return $list.css({
                 left: '',
                 right: ''
