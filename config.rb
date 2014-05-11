@@ -50,13 +50,12 @@ require 'toolkit'
 #   end
 # end
 
-@assets_path = '_assets/'
+@assets_path = '=assets/'
 set :css_dir,       @assets_path + 'stylesheets'
 set :js_dir,        @assets_path + 'javascripts'
 set :images_dir,    @assets_path + 'images'
 set :fonts_dir,     @assets_path + 'fonts'
 set :partials_dir,  @assets_path + 'partials'
-set :layouts_dir,   @assets_path + 'layouts'
 
 set :file_watcher_ignore,[
   /^bin\//,
@@ -97,16 +96,14 @@ activate :directory_indexes
 # Automatic image dimensions on image_tag helper
 activate :automatic_image_sizes
 
-# Reload the browser automatically whenever files change
-activate :livereload
-
 # Serve each JS asset separately
 set :debug_assets, true
 
 
 # Dev-specific configuration
 configure :development do
-  #
+  # Reload the browser automatically whenever files change
+  activate :livereload
 end
 
 

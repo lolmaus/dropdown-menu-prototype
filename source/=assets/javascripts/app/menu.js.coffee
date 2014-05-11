@@ -7,7 +7,7 @@ $.widget 'lolmaus.lolmenu',
     selItemList: '.menu-item-children'
     claExpanding: '-expanding'
     claExpanded: '-expanded'
-    msAimDuration: 800 # Should not be small
+    msAimDuration: 600 # Should not be small
     pxBreakpoint: parseInt window.breakpoint, 10
 
 
@@ -24,9 +24,6 @@ $.widget 'lolmaus.lolmenu',
       $currentItem = $(event.target).closest @options.selItem_withChildren
         .addClass @options.claExpanding
 
-      console.log jQuery._data( $currentItem.get(0), "events" );
-
-
       # Setting the flag that prevents the click action
       $currentItem.get(0).preventClick = true
 
@@ -34,8 +31,8 @@ $.widget 'lolmaus.lolmenu',
       $list = $currentItem.children @options.selItemList
 
         # Expanding it
-        .finish()
-        .slideDown @options.msAimDuration, =>
+        .stop()
+        .fadeIn @options.msAimDuration, =>
           # This callback is fired when animation completes
 
           # Applying the state class
@@ -62,14 +59,19 @@ $.widget 'lolmaus.lolmenu',
         # Only act if window width is sufficient
         return unless $window.width() > @options.pxBreakpoint
 
-        # Removing  the state class
-        $currentItem.removeClass @options.claExpanded
+#        # Removing  the state class
+#        $currentItem.removeClass @options.claExpanding
+#        $currentItem.removeClass @options.claExpanded
 
         # Collapsing current list
         $list
-#          .finish()
-          .slideUp @options.msAimDuration, =>
+          .stop()
+          .fadeOut @options.msAimDuration, =>
             # This callback is fired when animation completes
+
+            # Removing  the state class
+            $currentItem.removeClass @options.claExpanding
+            $currentItem.removeClass @options.claExpanded
 
             # Resetting offset
             $list.css

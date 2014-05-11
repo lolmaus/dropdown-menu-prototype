@@ -99,16 +99,28 @@ $menu-text-color: black
   padding-right: $menu-item-padding
 
   // ----- Icon -----
-  background-position: $menu-item-padding center
-  background-size: $menu-icon-size
-  background-repeat: no-repeat
-  background-image: $icon-external-link
+  &:before
+    content: ''
+    display: block
+    position: absolute
+    width: $menu-icon-size
+    height: $menu-icon-size
+    left: $menu-item-padding
+    top: 50%
+    margin-top: - $menu-icon-size / 2
 
-  .menu-item._withChildren:not(.-expanded) > &
-    background-image: $icon-arrow-right
+    background-position: center center
+    background-size: 100%
+    background-repeat: no-repeat
+    background-image: $icon-external-link
 
-  .menu-item._withChildren.-expanding > &
+  .menu-item._withChildren:not(.-expanded) > &:before
     background-image: $icon-arrow-down
+
+  .menu-item._withChildren.-expanding > &:before
+    background-image: $icon-loading
+    -webkit-animation: spin 1s linear infinite
+    animation: spin 1s linear infinite
 
   // Is expanded or hover
   .menu-item.-expanding > &, .menu-item.-expanded > &, &:hover
