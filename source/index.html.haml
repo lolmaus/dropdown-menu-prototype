@@ -1,0 +1,10 @@
+;;;
+"title": "Menu prototype"
+;;;
+
+-#%pre
+-#  = JSON.pretty_generate lorem_menu_items
+
+.page
+
+  = partial :menu, object: { items: lorem_menu_items }

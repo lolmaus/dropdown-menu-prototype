@@ -1,0 +1,131 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Menu in dropdown mode
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$menu-item-height: 30px
+$menu-icon-size: 20px
+$menu-item-padding: 10px
+$menu-text-color: black
+
+// --------------------------------------------------------------------------------------------------------------
+// .menu
+// --------------------------------------------------------------------------------------------------------------
+
+.menu
+
+  &, a, a:visited, a:link
+    color: $menu-text-color
+
+// --------------------------------------------------------------------------------------------------------------
+// .menu-item-children
+// --------------------------------------------------------------------------------------------------------------
+
+.menu-item-children
+
+  &._root
+
+    // ----- Layout -----
+    text-align: justify
+
+
+
+    // ----- Content layout -----
+
+    > .menu-item
+      display: inline-block
+
+    &:after
+      display: inline-block
+      content: ''
+      width: 100%
+
+
+  &:not(._root)
+    display: none
+    position: absolute
+    top: 100%
+    margin-top: -1px
+    min-width: 100%
+    border: 1px solid black
+    background-color: white
+    left: $menu-child-item-offset
+
+    //// Belongs to the last root item
+    //.menu-item-children._root > .menu-item:last-child &
+    //  right: $menu-child-item-offset
+
+    // Is expanded
+    .menu-item.-expanded > &, .menu-item.-expanding > &
+      z-index: 100
+
+    // Child items
+    > .menu-item:nth-child(even)
+      background-color: #eee
+
+
+
+// --------------------------------------------------------------------------------------------------------------
+// .menu-item
+// --------------------------------------------------------------------------------------------------------------
+
+.menu-item
+
+  // ----- Layout -----
+  position: relative
+  height: $menu-item-height
+
+  // ----- Content layout -----
+  .menu-item-link
+    width: 100%
+    display: inline-block
+
+
+// --------------------------------------------------------------------------------------------------------------
+// .menu-item-link
+// --------------------------------------------------------------------------------------------------------------
+
+.menu-item-link
+
+  // ----- Text -----
+  white-space: nowrap
+  font-size: 20px
+  height: $menu-item-height
+  text-decoration: none
+
+  // ----- Layout -----
+  padding-left: $menu-icon-size + $menu-item-padding * 2
+  padding-right: $menu-item-padding
+
+  // ----- Icon -----
+  background-position: $menu-item-padding center
+  background-size: $menu-icon-size
+  background-repeat: no-repeat
+  background-image: $icon-external-link
+
+  .menu-item._withChildren:not(.-expanded) > &
+    background-image: $icon-arrow-right
+
+  .menu-item._withChildren.-expanding > &
+    background-image: $icon-arrow-down
+
+  // Is expanded or hover
+  .menu-item.-expanding > &, .menu-item.-expanded > &, &:hover
+    background-color: pink
+
+
+// --------------------------------------------------------------------------------------------------------------
+// .menu-item-link-content
+// --------------------------------------------------------------------------------------------------------------
+
+.menu-item-link-content
+
+  // ----- Text -----
+  line-height: $menu-item-height
+
+  border-bottom: 1px solid $menu-text-color
+
+  // Dashed underline for expandable items
+  .menu-item._withChildren:not(.-expanded) > .menu-item-link > &
+    border-bottom: 1px dashed $menu-text-color

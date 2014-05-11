@@ -1,0 +1,11 @@
+:ruby
+  klass = menu_item[:children].length == 0 ? '_withoutChildren' : '_withChildren'
+
+%li.menu-item{class: klass}
+  %a.menu-item-link{href: menu_item[:url], class: "_#{menu_item[:id]}", target: '_blank'}
+    %span.menu-item-link-content= menu_item[:name]
+
+  - if menu_item[:children].length > 0
+    %ul.menu-item-children
+      - menu_item[:children].each do |child|
+        = partial :menu_item, object: child

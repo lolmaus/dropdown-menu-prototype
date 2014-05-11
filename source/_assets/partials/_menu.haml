@@ -1,0 +1,4 @@
+%nav.menu{class: menu[:class]}
+  %ul.menu-item-children._root
+    - menu[:items].each do |item|
+      = partial :menu_item, object: item
